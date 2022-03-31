@@ -30,6 +30,9 @@ jobs:
       
       - name: openapi-format
         run: npx openapi-format aa.yaml --output aa.yaml --yaml
+      
+      - name: git status
+        run: git status
      
       - uses: stefanzweifel/git-auto-commit-action@v3.0.0
         with:
