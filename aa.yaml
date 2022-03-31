@@ -1,0 +1,12 @@
+info:
+  contact:
+    name: TMP
+  description: TMP API
+  title: ebica3-management-console-api
+  version: '1.0'
+paths:
+  /v3/histories/fax-sent:
+    get:
+      operationId: get-tmp
+      summary: tmpの取得
+penapi: 3.0.0
