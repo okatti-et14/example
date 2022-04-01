@@ -9,39 +9,31 @@ on:
     branches:
       - main
     paths:
-      - 'aa.yaml'
-      - '.github/workflows/open-format.yml'
+      - "aa.yaml"
+      - ".github/workflows/open-format.yml"
 
 jobs:
   formatter:
     runs-on: ubuntu-latest
     steps:
-    
       - name: Checkout
         uses: actions/checkout@v2
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: 16
-   
+
       - name: sort-yaml
         run: npx yaml-sort --input aa.yaml --output aa.yaml
-      
+
       - name: openapi-format
         run: npx openapi-format aa.yaml --output aa.yaml --yaml
-      
+
       - name: git status
         run: git status
-     
-      - name: debug
-        run: |
-          echo "INPUT_REPOSITORY value: $INPUT_REPOSITORY";
-          cd "$INPUT_REPOSITORY";
-          echo "INPUT_STATUS_OPTIONS: ${INPUT_STATUS_OPTIONS}";
-          echo "::debug::Apply status options ${INPUT_STATUS_OPTIONS}";
-          [ -n "$(git status -s $INPUT_STATUS_OPTIONS -- $INPUT_FILE_PATTERN)" ]
-      #- uses: stefanzweifel/git-auto-commit-action@v4.14.0
-      #  with:
-      #    commit_message: Apply Code Formatter Change
-      #    ref: ${{ github.head_ref }}
+
+      - uses: stefanzweifel/git-auto-commit-action@v4.14.0
+        with:
+          commit_message: Apply Code Formatter Change
+          ref: ${{ github.head_ref }}
