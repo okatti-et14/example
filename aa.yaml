@@ -1,51 +1,9 @@
 openapi: 3.1.0
-servers:
-  - url: 'http://localhost:3000'
-components:
-  schemas:
-    User:
-      description: ''
-      type: object
-      properties:
-        createDate:
-          description: The date that the user was created.
-          type: string
-          format: date
-        dateOfBirth:
-          type: string
-          format: date
-          example: '1997-10-31'
-        email:
-          type: string
-          format: email
-        emailVerified:
-          description: Set to true if the user's email has been verified.
-          type: boolean
-        firstName:
-          type: string
-        id:
-          description: Unique identifier for the given user.
-          type: integer
-        lastName:
-          type: string
-      examples:
-        - dateOfBirth: '1997-10-31'
-          email: alice.smith@gmail.com
-          emailVerified: true
-          firstName: Alice
-          id: 142
-          lastName: Smith
-          signUpDate: '2019-08-24'
-      required:
-        - id
-        - firstName
-        - lastName
-        - email
-        - emailVerified
-      title: User
 info:
   title: tmp
   version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
 paths:
   /user:
     post:
@@ -185,4 +143,45 @@ paths:
           description: User Not Found
         '409':
           description: Email Already Taken
-
+components:
+  schemas:
+    User:
+      description: ''
+      type: object
+      properties:
+        createDate:
+          description: The date that the user was created.
+          type: string
+          format: date
+        dateOfBirth:
+          type: string
+          format: date
+          example: '1997-10-31'
+        email:
+          type: string
+          format: email
+        emailVerified:
+          description: Set to true if the user's email has been verified.
+          type: boolean
+        firstName:
+          type: string
+        id:
+          description: Unique identifier for the given user.
+          type: integer
+        lastName:
+          type: string
+      examples:
+        - dateOfBirth: '1997-10-31'
+          email: alice.smith@gmail.com
+          emailVerified: true
+          firstName: Alice
+          id: 142
+          lastName: Smith
+          signUpDate: '2019-08-24'
+      required:
+        - id
+        - firstName
+        - lastName
+        - email
+        - emailVerified
+      title: User
