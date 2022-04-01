@@ -1,0 +1,39 @@
+name: openapi-format.yml
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+    branches:
+      - main
+    paths:
+      - "aa.yaml"
+      - ".github/workflows/open-format.yml"
+
+jobs:
+  formatter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
+      - name: sort-yaml
+        run: npx yaml-sort --input aa.yaml --output aa.yaml
+
+      - name: openapi-format
+        run: npx openapi-format aa.yaml --output aa.yaml --yaml
+
+      - name: git status
+        run: git status
+
+      - uses: stefanzweifel/git-auto-commit-action@v4.14.0
+        with:
+          commit_message: Apply Code Formatter Change
+          ref: ${{ github.head_ref }}
